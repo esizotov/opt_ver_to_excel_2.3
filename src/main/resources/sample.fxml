@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<TabPane fx:controller="Controller" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+         maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+         tabClosingPolicy="UNAVAILABLE">
+    <tabs>
+        <Tab text="Audi">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <children>
+                        <SplitPane dividerPositions="0.4146341463414634" layoutX="-1.0" orientation="VERTICAL" prefHeight="700" prefWidth="1000">
+                            <items>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="275.0" prefWidth="998.0">
+                                    <children>
+                                        <TextField fx:id="textFieldID" onAction="#buttonSearch"
+                                                   layoutX="14.0" layoutY="14.0" promptText="Номер детали" />
+                                        <Button fx:id="search" onAction="#buttonSearch"
+                                                layoutX="177.0" layoutY="14.0" mnemonicParsing="false" text="Найти">
+                                        </Button>
+                                        <TableView fx:id="tableViewID" layoutX="14.0" layoutY="52.0" prefHeight="220.0" prefWidth="970.0">
+                                            <columns>
+                                                <TableColumn prefWidth="150.0" text="Part number" fx:id="columnPartNumberID"/>
+                                                <TableColumn prefWidth="250.0" text="Name part" fx:id="columnNamePartID"/>
+                                                <TableColumn prefWidth="100.0" text="Price" fx:id="columnPriceID"/>
+                                                <TableColumn prefWidth="100.0" text="Remains of CS" fx:id="columnRemainsID"/>
+                                            </columns>
+                                        </TableView>
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                    <children>
+                                        <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Общий прайс" />
+                                        <TextField fx:id="textFieldChooserAllPriceID"
+                                                   layoutX="7.0" layoutY="25.0" prefHeight="25.0" prefWidth="239.0" promptText="Выберите файл" />
+                                        <Button fx:id="fileChooser_1" onAction="#fileChooser"
+                                                layoutX="257.0" layoutY="25.0" mnemonicParsing="false" text="..."/>
+                                        <Button fx:id="buttonLoadAllPrice" onAction="#buttonLoadAllParts"
+                                                layoutX="292.0" layoutY="25.0" mnemonicParsing="false" text="Загрузить" />
+
+                                        <Text layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Остатки ЦС" />
+                                        <TextField fx:id="textFieldChooserStockID"
+                                                   layoutX="7.0" layoutY="76.0" prefHeight="25.0" prefWidth="239.0" promptText="Выберите файл" />
+                                        <Button fx:id="fileChooser_2" onAction="#fileChooser"
+                                                layoutX="257.0" layoutY="76.0" mnemonicParsing="false" text="..." />
+                                        <Button fx:id="buttonLoadStock" onAction="#buttonLoadPartsCS"
+                                                layoutX="292.0" layoutY="76.0" mnemonicParsing="false" text="Загрузить" />
+
+                                        <Text layoutX="14.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Сток ЦС (0-й прайс)" />
+                                        <Label layoutX="400.0" layoutY="170.0" text="Скидку указать с минусом, наценку с плюсом (в %)!!!"
+                                               textFill="red">
+                                            <font>
+                                                <Font name="Arial Bold Italic" size="18.0"/>
+                                            </font>
+                                        </Label>
+
+                                        <TextField fx:id="textFieldSalePriceStockID" text="0"
+                                                   layoutX="180.0" layoutY="150.0" prefHeight="25.0" prefWidth="60.0" promptText="Скидка" />
+                                        <Button fx:id="buttonPriceStockID" onAction="#priceStockCS"
+                                                layoutX="250.0" layoutY="150.0" mnemonicParsing="false" text="Сформировать" />
+
+                                        <Text layoutX="14.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Срочный ЦС (0-й прайс)" />
+                                        <TextField fx:id="textFieldSalePriceZSOID" text="0"
+                                                   layoutX="180.0" layoutY="185.0" prefHeight="25.0" prefWidth="60.0" promptText="Скидка" />
+                                        <Button fx:id="buttonPriceZSOID" onAction="#priceZSOCS"
+                                                layoutX="250.0" layoutY="185.0" mnemonicParsing="false" text="Сформировать" />
+
+                                        <Text layoutX="14.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Сток ЦС (по группам)" />
+                                        <Text layoutX="180.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Группа ТО (12%)" />
+                                        <Text layoutX="290.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дет. износа (8%)" />
+                                        <Text layoutX="400.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дет. рем. гр. (4%)" />
+                                        <Text layoutX="510.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Кузов и ост. (2%)" />
+                                        <TextField fx:id="textFieldSaleStock12GroupID" text="0"
+                                                   layoutX="180.0" layoutY="250.0" prefHeight="25.0" prefWidth="60.0" promptText="Скидка" />
+                                        <TextField fx:id="textFieldSaleStock8GroupID" text="0"
+                                                   layoutX="290.0" layoutY="250.0" prefHeight="25.0" prefWidth="60.0" promptText="Скидка" />
+                                        <TextField fx:id="textFieldSaleStock4GroupID" text="0"
+                                                   layoutX="400.0" layoutY="250.0" prefHeight="25.0" prefWidth="60.0" promptText="Скидка" />
+                                        <TextField fx:id="textFieldSaleStock2GroupID" text="0"
+                                                   layoutX="510.0" layoutY="250.0" prefHeight="25.0" prefWidth="60.0" promptText="Скидка" />
+                                        <Button fx:id="buttonPriceStockGroupID" onAction="#priceStockGroup"
+                                                layoutX="615.0" layoutY="250.0" mnemonicParsing="false" text="Сформировать" />
+
+                                        <Text layoutX="14.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Срочный ЦС (по группам)" />
+                                        <Text layoutX="180.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Группа ТО (12%)" />
+                                        <Text layoutX="290.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дет. износа (8%)" />
+                                        <Text layoutX="400.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дет. рем. гр (4%)" />
+                                        <Text layoutX="510.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Кузов и ост. (2%)" />
+                                        <TextField fx:id="textFieldSaleZSO12GroupID" text="0"
+                                                   layoutX="180.0" layoutY="320.0" prefHeight="25.0" prefWidth="60.0" promptText="Скидка" />
+                                        <TextField fx:id="textFieldSaleZSO8GroupID" text="0"
+                                                   layoutX="290.0" layoutY="320.0" prefHeight="25.0" prefWidth="60.0" promptText="Скидка" />
+                                        <TextField fx:id="textFieldSaleZSO4GroupID" text="0"
+                                                   layoutX="400.0" layoutY="320.0" prefHeight="25.0" prefWidth="60.0" promptText="Скидка" />
+                                        <TextField fx:id="textFieldSaleZSO2GroupID" text="0"
+                                                   layoutX="510.0" layoutY="320.0" prefHeight="25.0" prefWidth="60.0" promptText="Скидка" />
+                                        <Button fx:id="buttonPriceZSOGroupID" onAction="#priceZSOGroup"
+                                                layoutX="615.0" layoutY="320.0" mnemonicParsing="false" text="Сформировать" />
+                                        <Line endX="978.0" layoutX="10.0" layoutY="120.0" startX="0.0" />
+                                    </children></AnchorPane>
+                            </items>
+                        </SplitPane>
+                    </children></AnchorPane>
+            </content>
+        </Tab>
+        <Tab text="JLR">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <children>
+                        <SplitPane dividerPositions="0.4146341463414634" layoutX="-1.0" orientation="VERTICAL" prefHeight="700" prefWidth="1000">
+                            <items>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="275.0" prefWidth="998.0">
+                                    <children>
+                                        <TextField layoutX="14.0" layoutY="14.0" />
+                                        <Button layoutX="177.0" layoutY="14.0" mnemonicParsing="false" text="Найти" />
+                                        <TextArea layoutX="14.0" layoutY="50.0" prefHeight="220.0" prefWidth="970.0" />
+                                    </children>
+                                </AnchorPane>
+
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                    <children>
+                                        <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Общий прайс Jaguar" />
+                                        <TextField fx:id="textFieldChooserAllPriceJaguarID"
+                                                   layoutX="7.0" layoutY="25.0" prefHeight="25.0" prefWidth="239.0" promptText="Выберите файл" />
+                                        <Button fx:id="fileChooserJaguarAllID" onAction="#fileChooser"
+                                                layoutX="257.0" layoutY="25.0" mnemonicParsing="false" text="..."/>
+                                        <Button fx:id="buttonLoadAllPriceJaguarID" onAction="#buttonLoadAllPriceJaguar"
+                                                layoutX="292.0" layoutY="25.0" mnemonicParsing="false" text="Загрузить" />
+
+                                        <Text layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Общий прайс Land Rover" />
+                                        <TextField fx:id="textFieldChooserAllPriceLRID"
+                                                   layoutX="7.0" layoutY="76.0" prefHeight="25.0" prefWidth="239.0" promptText="Выберите файл" />
+                                        <Button fx:id="fileChooserLRAllID" onAction="#fileChooser"
+                                                layoutX="257.0" layoutY="76.0" mnemonicParsing="false" text="..."/>
+                                        <Button fx:id="buttonLoadAllPriceLRID" onAction="#buttonLoadAllPriceLR"
+                                                layoutX="292.0" layoutY="76.0" mnemonicParsing="false" text="Загрузить" />
+
+                                        <Text layoutX="14.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Остатки ЦС Jaguar" />
+                                        <TextField fx:id="textFieldChooserJaguarStockID"
+                                                   layoutX="7.0" layoutY="127.0" prefHeight="25.0" prefWidth="239.0" promptText="Выберите файл" />
+                                        <Button fx:id="fileChooserJaguarStockID" onAction="#fileChooser"
+                                                layoutX="257.0" layoutY="127.0" mnemonicParsing="false" text="..." />
+                                        <Button fx:id="buttonLoadPartsCSJaguarID" onAction="#buttonLoadPartsCSJaguar"
+                                                layoutX="292.0" layoutY="127.0" mnemonicParsing="false" text="Загрузить" />
+
+                                        <Text layoutX="14.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Остатки ЦС Land Rover" />
+                                        <TextField fx:id="textFieldChooserLRStockID"
+                                                   layoutX="7.0" layoutY="177.0" prefHeight="25.0" prefWidth="239.0" promptText="Выберите файл" />
+                                        <Button fx:id="fileChooserLRStockID" onAction="#fileChooser"
+                                                layoutX="257.0" layoutY="177.0" mnemonicParsing="false" text="..." />
+                                        <Button fx:id="buttonLoadPartsCSLRID" onAction="#buttonLoadPartsCSLR"
+                                                layoutX="292.0" layoutY="177.0" mnemonicParsing="false" text="Загрузить" />
+
+                                        <Line endX="978.0" layoutX="10.0" layoutY="221.0" startX="0.0" />
+
+                                        <Text layoutX="14.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Сток ЦС" />
+                                        <Label layoutX="400.0" layoutY="271.0" text="Скидку указать с минусом, наценку с плюсом (в %)!!!"
+                                               textFill="red">
+                                            <font>
+                                                <Font name="Arial Bold Italic" size="18.0"/>
+                                            </font>
+                                        </Label>
+
+                                        <TextField fx:id="textFieldDiscountStockJLRID" text="0"
+                                                   layoutX="180.0" layoutY="251.0" prefHeight="25.0" prefWidth="60.0" promptText="Скидка" />
+                                        <Button fx:id="buttonPriceStockJLRID" onAction="#priceStockJLRCS"
+                                                layoutX="250.0" layoutY="251.0" mnemonicParsing="false" text="Сформировать" />
+
+                                        <Text layoutX="14.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Срочный ЦС" />
+                                        <TextField fx:id="textFieldDiscountZSOJLRID" text="0"
+                                                   layoutX="180.0" layoutY="286.0" prefHeight="25.0" prefWidth="60.0" promptText="Скидка" />
+                                        <Button fx:id="buttonPriceZSOJLRID" onAction="#priceZSOJLRCS"
+                                                layoutX="250.0" layoutY="286.0" mnemonicParsing="false" text="Сформировать" />
+
+                                    </children>
+                                </AnchorPane>
+                            </items>
+                        </SplitPane>
+                    </children></AnchorPane>
+            </content>
+        </Tab>
+        <Tab text="Volvo">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <children>
+                        <SplitPane dividerPositions="0.4146341463414634" layoutX="-1.0" orientation="VERTICAL" prefHeight="700" prefWidth="1000">
+                            <items>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="275.0" prefWidth="998.0">
+                                    <children>
+                                        <TextField
+                                                   layoutX="14.0" layoutY="14.0" promptText="Номер детали" />
+                                        <Button
+                                                layoutX="177.0" layoutY="14.0" mnemonicParsing="false" text="Найти">
+                                        </Button>
+                                        <TableView layoutX="14.0" layoutY="52.0" prefHeight="220.0" prefWidth="970.0">
+                                            <columns>
+                                                <TableColumn prefWidth="150.0" text="Part number"/>
+                                                <TableColumn prefWidth="250.0" text="Name part"/>
+                                                <TableColumn prefWidth="100.0" text="Price"/>
+                                                <TableColumn prefWidth="100.0" text="Remains of CS"/>
+                                            </columns>
+                                        </TableView>
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                    <children>
+                                        <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Общий прайс" />
+                                        <TextField fx:id="textFieldChooserAllPriceVolvoID"
+                                                   layoutX="7.0" layoutY="25.0" prefHeight="25.0" prefWidth="239.0" promptText="Выберите файл" />
+                                        <Button fx:id="fileChooserVolvoAll" onAction="#fileChooser"
+                                                layoutX="257.0" layoutY="25.0" mnemonicParsing="false" text="..."/>
+                                        <Button fx:id="buttonLoadAllPriceVolvoID" onAction="#buttonLoadAllPriceVolvo"
+                                                layoutX="292.0" layoutY="25.0" mnemonicParsing="false" text="Загрузить" />
+
+                                        <Text layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Остатки ЦС" />
+                                        <TextField fx:id="textFieldChooserVolvoStockID"
+                                                   layoutX="7.0" layoutY="76.0" prefHeight="25.0" prefWidth="239.0" promptText="Выберите файл" />
+                                        <Button fx:id="fileChooserVolvoStock" onAction="#fileChooser"
+                                                layoutX="257.0" layoutY="76.0" mnemonicParsing="false" text="..." />
+                                        <Button fx:id="buttonLoadPartsCSVolvoID" onAction="#buttonLoadPartsCSVolvo"
+                                                layoutX="292.0" layoutY="76.0" mnemonicParsing="false" text="Загрузить" />
+
+                                        <Text layoutX="14.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Группы скидок" />
+                                        <TextField fx:id="textFieldChooserVolvoSaleGroupID"
+                                                   layoutX="7.0" layoutY="127.0" prefHeight="25.0" prefWidth="239.0" promptText="Выберите файл" />
+                                        <Button fx:id="fileChooserVolvoSaleGroupID" onAction="#fileChooser"
+                                                layoutX="257.0" layoutY="127.0" mnemonicParsing="false" text="..." />
+                                        <Button fx:id="buttonLoadSaleGroupID" onAction="#buttonLoadSaleGroup"
+                                                layoutX="292.0" layoutY="127.0" mnemonicParsing="false" text="Загрузить" />
+                                        <Line endX="978.0" layoutX="10.0" layoutY="170.0" startX="0.0" />
+
+                                        <Text layoutX="14.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Сток ЦС" />
+                                        <Label layoutX="400.0" layoutY="220.0" text="Скидку указать с минусом, наценку с плюсом (в %)!!!"
+                                               textFill="red">
+                                            <font>
+                                                <Font name="Arial Bold Italic" size="18.0"/>
+                                            </font>
+                                        </Label>
+
+                                        <TextField fx:id="textFieldDiscountStockVolvoID" text="0"
+                                                   layoutX="180.0" layoutY="200.0" prefHeight="25.0" prefWidth="60.0" promptText="Скидка" />
+                                        <Button fx:id="buttonPriceStockVolvoID" onAction="#priceStockVolvoCS"
+                                                layoutX="250.0" layoutY="200.0" mnemonicParsing="false" text="Сформировать" />
+
+                                        <Text layoutX="14.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Срочный ЦС" />
+                                        <TextField fx:id="textFieldDiscountZSOVolvoID" text="0"
+                                                   layoutX="180.0" layoutY="235.0" prefHeight="25.0" prefWidth="60.0" promptText="Скидка" />
+                                        <Button fx:id="buttonPriceZSOVolvoID" onAction="#priceZSOVolvoCS"
+                                                layoutX="250.0" layoutY="235.0" mnemonicParsing="false" text="Сформировать" />
+
+                                    </children>
+                                </AnchorPane>
+                            </items>
+                        </SplitPane>
+                    </children></AnchorPane>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>
