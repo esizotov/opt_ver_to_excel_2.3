@@ -1,0 +1,29 @@
+#btn1 {
+    -fx-background-color: #b5b7ba;
+}
+#btn1 .text {
+    -fx-effect: dropshadow(gaussian,black,14,0.9,0,0);
+}
+
+#btn1:hover {
+    -fx-background-color: black;
+}
+
+#textFieldID {
+    -fx-background-color: white;
+    -fx-text-inner-color: black;
+}
+
+#textAreaID {
+    -fx-background-image: url("img/img1.png");
+}
+#textAreaID .text {
+    -fx-effect: dropshadow(gaussian,white,14,0.9,0,0);
+}
+
+#textAreaID .viewport {
+    -fx-background-color: transparent;
+}
+#textAreaID .content {
+    -fx-background-color: transparent;
+}

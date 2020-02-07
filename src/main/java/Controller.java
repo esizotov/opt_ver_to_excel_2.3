@@ -9,6 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.io.File;
@@ -185,6 +186,9 @@ public class Controller {
     @FXML
     Button buttonPriceZSOJLRID;
 
+    @FXML
+    Button chatBotID;
+
     // заполнение tableView +++++
     @FXML
     private void initialize() {
@@ -350,5 +354,10 @@ public class Controller {
     @FXML
     public void priceZSOJLRCS() {
         DataBaseJLR.formPriceZSOCSJLR(textFieldDiscountZSOJLRID.getText());
+    }
+
+    @FXML
+    public void chatBot() throws Exception {
+        new ChatBotWindow().start(new Stage());
     }
 }
